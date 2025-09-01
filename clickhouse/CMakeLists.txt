@@ -151,87 +151,91 @@ IF (CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND NOT DISABLE_CLANG_LIBC_WORKAROUND
     ENDIF ()
 ENDIF ()
 
+IF (CLICKHOUSE_INSTALL_TARGETS)
 
-INSTALL (TARGETS clickhouse-cpp-lib
-    ARCHIVE DESTINATION lib
-    LIBRARY DESTINATION lib
-)
-IF (NOT BUILD_SHARED_LIBS)
-    IF (NOT WITH_SYSTEM_CITYHASH)
-        INSTALL (TARGETS cityhash
-            ARCHIVE DESTINATION lib
-            LIBRARY DESTINATION lib
-        )
-    ENDIF()
-    IF (NOT WITH_SYSTEM_LZ4)
-        INSTALL (TARGETS lz4
-            ARCHIVE DESTINATION lib
-            LIBRARY DESTINATION lib
-        )
-    ENDIF()
-    IF (NOT WITH_SYSTEM_ZSTD)
-        INSTALL (TARGETS zstdstatic
-            ARCHIVE DESTINATION lib
-            LIBRARY DESTINATION lib
-        )
-    ENDIF()
-    IF (NOT WITH_SYSTEM_ABSEIL)
-        INSTALL (TARGETS absl_int128
-            ARCHIVE DESTINATION lib
-            LIBRARY DESTINATION lib
-        )
+    INSTALL (TARGETS clickhouse-cpp-lib
+        ARCHIVE DESTINATION lib
+        LIBRARY DESTINATION lib
+    )
+    IF (NOT BUILD_SHARED_LIBS)
+        IF (NOT WITH_SYSTEM_CITYHASH)
+            INSTALL (TARGETS cityhash
+                ARCHIVE DESTINATION lib
+                LIBRARY DESTINATION lib
+            )
+        ENDIF()
+        IF (NOT WITH_SYSTEM_LZ4)
+            INSTALL (TARGETS lz4
+                ARCHIVE DESTINATION lib
+                LIBRARY DESTINATION lib
+            )
+        ENDIF()
+        IF (NOT WITH_SYSTEM_ZSTD)
+            INSTALL (TARGETS zstdstatic
+                ARCHIVE DESTINATION lib
+                LIBRARY DESTINATION lib
+            )
+        ENDIF()
+        IF (NOT WITH_SYSTEM_ABSEIL)
+            INSTALL (TARGETS absl_int128
+                ARCHIVE DESTINATION lib
+                LIBRARY DESTINATION lib
+            )
+        ENDIF()
     ENDIF()
 ENDIF()
 
-# general
-INSTALL(FILES block.h DESTINATION include/clickhouse/)
-INSTALL(FILES client.h DESTINATION include/clickhouse/)
-INSTALL(FILES error_codes.h DESTINATION include/clickhouse/)
-INSTALL(FILES exceptions.h DESTINATION include/clickhouse/)
-INSTALL(FILES server_exception.h DESTINATION include/clickhouse/)
-INSTALL(FILES protocol.h DESTINATION include/clickhouse/)
-INSTALL(FILES query.h DESTINATION include/clickhouse/)
-INSTALL(FILES version.h DESTINATION include/clickhouse/)
+IF (CLICKHOUSE_INSTALL_TARGETS)
+    # general
+    INSTALL(FILES block.h DESTINATION include/clickhouse/)
+    INSTALL(FILES client.h DESTINATION include/clickhouse/)
+    INSTALL(FILES error_codes.h DESTINATION include/clickhouse/)
+    INSTALL(FILES exceptions.h DESTINATION include/clickhouse/)
+    INSTALL(FILES server_exception.h DESTINATION include/clickhouse/)
+    INSTALL(FILES protocol.h DESTINATION include/clickhouse/)
+    INSTALL(FILES query.h DESTINATION include/clickhouse/)
+    INSTALL(FILES version.h DESTINATION include/clickhouse/)
 
-# base
-INSTALL(FILES base/buffer.h DESTINATION include/clickhouse/base/)
-INSTALL(FILES base/compressed.h DESTINATION include/clickhouse/base/)
-INSTALL(FILES base/input.h DESTINATION include/clickhouse/base/)
-INSTALL(FILES base/open_telemetry.h DESTINATION include/clickhouse/base/)
-INSTALL(FILES base/output.h DESTINATION include/clickhouse/base/)
-INSTALL(FILES base/platform.h DESTINATION include/clickhouse/base/)
-INSTALL(FILES base/projected_iterator.h DESTINATION include/clickhouse/base/)
-INSTALL(FILES base/singleton.h DESTINATION include/clickhouse/base/)
-INSTALL(FILES base/socket.h DESTINATION include/clickhouse/base/)
-INSTALL(FILES base/string_utils.h DESTINATION include/clickhouse/base/)
-INSTALL(FILES base/string_view.h DESTINATION include/clickhouse/base/)
-INSTALL(FILES base/uuid.h DESTINATION include/clickhouse/base/)
-INSTALL(FILES base/wire_format.h DESTINATION include/clickhouse/base/)
-INSTALL(FILES base/endpoints_iterator.h DESTINATION include/clickhouse/base/)
+    # base
+    INSTALL(FILES base/buffer.h DESTINATION include/clickhouse/base/)
+    INSTALL(FILES base/compressed.h DESTINATION include/clickhouse/base/)
+    INSTALL(FILES base/input.h DESTINATION include/clickhouse/base/)
+    INSTALL(FILES base/open_telemetry.h DESTINATION include/clickhouse/base/)
+    INSTALL(FILES base/output.h DESTINATION include/clickhouse/base/)
+    INSTALL(FILES base/platform.h DESTINATION include/clickhouse/base/)
+    INSTALL(FILES base/projected_iterator.h DESTINATION include/clickhouse/base/)
+    INSTALL(FILES base/singleton.h DESTINATION include/clickhouse/base/)
+    INSTALL(FILES base/socket.h DESTINATION include/clickhouse/base/)
+    INSTALL(FILES base/string_utils.h DESTINATION include/clickhouse/base/)
+    INSTALL(FILES base/string_view.h DESTINATION include/clickhouse/base/)
+    INSTALL(FILES base/uuid.h DESTINATION include/clickhouse/base/)
+    INSTALL(FILES base/wire_format.h DESTINATION include/clickhouse/base/)
+    INSTALL(FILES base/endpoints_iterator.h DESTINATION include/clickhouse/base/)
 
-# columns
-INSTALL(FILES columns/array.h DESTINATION include/clickhouse/columns/)
-INSTALL(FILES columns/column.h DESTINATION include/clickhouse/columns/)
-INSTALL(FILES columns/date.h DESTINATION include/clickhouse/columns/)
-INSTALL(FILES columns/decimal.h DESTINATION include/clickhouse/columns/)
-INSTALL(FILES columns/enum.h DESTINATION include/clickhouse/columns/)
-INSTALL(FILES columns/factory.h DESTINATION include/clickhouse/columns/)
-INSTALL(FILES columns/geo.h DESTINATION include/clickhouse/columns/)
-INSTALL(FILES columns/ip4.h DESTINATION include/clickhouse/columns/)
-INSTALL(FILES columns/ip6.h DESTINATION include/clickhouse/columns/)
-INSTALL(FILES columns/itemview.h DESTINATION include/clickhouse/columns/)
-INSTALL(FILES columns/lowcardinality.h DESTINATION include/clickhouse/columns/)
-INSTALL(FILES columns/nullable.h DESTINATION include/clickhouse/columns/)
-INSTALL(FILES columns/numeric.h DESTINATION include/clickhouse/columns/)
-INSTALL(FILES columns/map.h DESTINATION include/clickhouse/columns/)
-INSTALL(FILES columns/string.h DESTINATION include/clickhouse/columns/)
-INSTALL(FILES columns/tuple.h DESTINATION include/clickhouse/columns/)
-INSTALL(FILES columns/utils.h DESTINATION include/clickhouse/columns/)
-INSTALL(FILES columns/uuid.h DESTINATION include/clickhouse/columns/)
+    # columns
+    INSTALL(FILES columns/array.h DESTINATION include/clickhouse/columns/)
+    INSTALL(FILES columns/column.h DESTINATION include/clickhouse/columns/)
+    INSTALL(FILES columns/date.h DESTINATION include/clickhouse/columns/)
+    INSTALL(FILES columns/decimal.h DESTINATION include/clickhouse/columns/)
+    INSTALL(FILES columns/enum.h DESTINATION include/clickhouse/columns/)
+    INSTALL(FILES columns/factory.h DESTINATION include/clickhouse/columns/)
+    INSTALL(FILES columns/geo.h DESTINATION include/clickhouse/columns/)
+    INSTALL(FILES columns/ip4.h DESTINATION include/clickhouse/columns/)
+    INSTALL(FILES columns/ip6.h DESTINATION include/clickhouse/columns/)
+    INSTALL(FILES columns/itemview.h DESTINATION include/clickhouse/columns/)
+    INSTALL(FILES columns/lowcardinality.h DESTINATION include/clickhouse/columns/)
+    INSTALL(FILES columns/nullable.h DESTINATION include/clickhouse/columns/)
+    INSTALL(FILES columns/numeric.h DESTINATION include/clickhouse/columns/)
+    INSTALL(FILES columns/map.h DESTINATION include/clickhouse/columns/)
+    INSTALL(FILES columns/string.h DESTINATION include/clickhouse/columns/)
+    INSTALL(FILES columns/tuple.h DESTINATION include/clickhouse/columns/)
+    INSTALL(FILES columns/utils.h DESTINATION include/clickhouse/columns/)
+    INSTALL(FILES columns/uuid.h DESTINATION include/clickhouse/columns/)
 
-# types
-INSTALL(FILES types/type_parser.h DESTINATION include/clickhouse/types/)
-INSTALL(FILES types/types.h DESTINATION include/clickhouse/types/)
+    # types
+    INSTALL(FILES types/type_parser.h DESTINATION include/clickhouse/types/)
+    INSTALL(FILES types/types.h DESTINATION include/clickhouse/types/)
+ENDIF()
 
 IF (WITH_OPENSSL)
     TARGET_LINK_LIBRARIES (clickhouse-cpp-lib OpenSSL::SSL)
